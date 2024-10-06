@@ -1,4 +1,5 @@
 import './App.css'
+import Nav from './components/Nav'
 
 function App() {
 
@@ -6,13 +7,11 @@ function App() {
     <div className="container mx-auto ">
       <div className="grid grid-rows-[auto_1fr] grid-cols-6 min-h-screen">
         {/* HEADER */}
-        <div className="col-span-6 p-5">
-          HEADER
-        </div>
+        <Nav />
 
-        {/* NAV */}
+        {/* ASIDE */}
         <div className="hidden md:block col-span-1 p-5">
-          NAV
+          ASIDE
         </div>
 
         {/* MAIN */}
