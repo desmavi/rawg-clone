@@ -7,10 +7,13 @@ export default {
   theme: {
     extend: {
       colors:{
-        dark:"#151523"
+        dark:"#151523",
+        lightDark:"hsla(0,0%,100%,.16)"
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ]
 }
 
