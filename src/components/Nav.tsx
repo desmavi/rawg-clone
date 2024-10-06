@@ -1,4 +1,5 @@
 import logo from "../assets/logo.webp"
+import ToogleDarkMode from "./ToogleDarkMode"
 
 function Nav() {
     return (
@@ -10,14 +11,12 @@ function Nav() {
 
             <div className="w-[50%]">
                 <input 
-                    className="w-[100%] bg-lightDark py-3 px-4 rounded-3xl focus:outline-none focus:outline-slate-400 focus:ring-0 focus:border-none " type="text"
+                    className="w-[100%] border-[1px] border-solid border-slate-400 bg-lightDark py-3 px-4 rounded-3xl focus:outline-none focus:outline-slate-400 focus:ring-0 focus:border-none dark:border-0 " type="text"
                     placeholder="Search..." 
                 />
             </div>
 
-            <div>
-                <input type="checkbox" className="toggle" defaultChecked />
-            </div>
+           <ToogleDarkMode />
         </div>
     </div>
   )
