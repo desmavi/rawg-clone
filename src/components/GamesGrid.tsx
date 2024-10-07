@@ -9,7 +9,7 @@ interface GamesGrid {
 
 function GamesGrid( { selectedGenre } : GamesGrid) {
 
-    const { games, error, isLoading} = useGames()
+    const { data : games, error, isLoading} = useGames()
 
     const filterGamesByGenre = selectedGenre 
     ? games.filter(game => {

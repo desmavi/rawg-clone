@@ -10,7 +10,6 @@ interface GameCardProps {
 }
 
 function GameCard({ item, isLoading } : GameCardProps) {
-
     return (
         <>
             {
