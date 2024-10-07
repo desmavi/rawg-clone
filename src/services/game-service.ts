@@ -1,3 +1,4 @@
+import { Genre } from "./genre-service";
 import createRequest from "./https-request";
 
 export interface Platform {
@@ -24,7 +25,8 @@ export interface Game {
     background_image: string,
     ratings: Ratings[],
     parent_platforms: Platforms[],
-    metacritic: number
+    metacritic: number,
+    genres: Genre[]
 
 }
 

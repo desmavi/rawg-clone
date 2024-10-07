@@ -31,14 +31,9 @@ function GameCard({ item, isLoading } : GameCardProps) {
                             <ScoreElement metacritic={item.metacritic} />
                         </div>
                         <p className="text-2xl font-bold mb-2">{item.name} {getRating(item.ratings)}</p>
-                        
-
                     </div>
                 </div> 
-               
             }
-
-             
         </>
 
     )

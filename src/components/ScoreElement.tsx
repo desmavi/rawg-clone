@@ -5,11 +5,11 @@ interface ScoreProps {
 }
 
 function ScoreElement({ metacritic } : ScoreProps ) {
-  return (
-    <div className={`badge rounded-sm ${getScoreColor(metacritic)}`}>
-        {metacritic}
-    </div>
-  )
+    return (
+        <div className={`badge rounded-sm ${getScoreColor(metacritic)}`}>
+            {metacritic}
+        </div>
+    )
 }
 
 export default ScoreElement

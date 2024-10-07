@@ -30,8 +30,8 @@ app.get('/games', (req, res) => {
         .then(response => res.json(response.data))
 })
 
-app.get('/platforms', (req, res) => {
-    api.get("platforms")
+app.get('/genres', (req, res) => {
+    api.get("genres")
         .then(response => res.json(response.data))
 })
 

@@ -1,8 +1,16 @@
+import { useState } from 'react'
 import './App.css'
 import Nav from './components/Nav'
 import GamesGrid from './components/GamesGrid'
+import Aside from './components/Aside'
 
 function App() {
+
+  const [selectedGenre, setSelectedGenre] = useState<number | null >(null)
+
+  function handleSelectGenre(id: number | null){
+    setSelectedGenre(id)
+  }
   
   return (
     <div className='bg-white text-dark dark:bg-dark dark:text-white transition-all'>
@@ -13,12 +21,12 @@ function App() {
 
           {/* ASIDE */}
           <div className="hidden md:block col-span-1 px-5 py-8">
-            ASIDE
+            <Aside selectedGenre={selectedGenre} onSelectGenre={handleSelectGenre}/>
           </div>
 
           {/* MAIN */}
           <div className="col-span-6 md:col-span-5 px-5 py-8">
-            <GamesGrid />
+            <GamesGrid selectedGenre={selectedGenre} />
           </div>
         </div>
       </div>
