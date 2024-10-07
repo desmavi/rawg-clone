@@ -1,29 +1,46 @@
-import React from 'react'
-import { getRating } from '../utils/gameCard'
+import { getRating, optimizeImageUrl } from '../utils/gameCard'
 import { Game } from '../services/game-service'
+import PlatformIconsList from './PlatformIconsList'
+import ScoreElement from './ScoreElement'
+
 
 interface GameCardProps {
-    item: Game
+    item: Game,
+    isLoading: boolean
 }
 
-function GameCard({ item } : GameCardProps) {
+function GameCard({ item, isLoading } : GameCardProps) {
+
     return (
-        <div key={item.id} 
-            className='border-[1px] dark:bg-mediumDark dark:border-0 rounded-3xl overflow-hidden'>
-                <div className='w-full'>
-                    <img 
-                        src={item.background_image} 
-                        className='object-cover w-full h-70 md:h-40'/>
-                </div>
-                <div className='p-5 '>
-                    <div className='flex gap-2'>
-                        {/* {item.platforms.map(el => {
-                            return <img key={el.platform.id} src={el.platform.image_background} alt={el.platform.name} />
-                        } )} */}
+        <>
+            {
+                isLoading ?
+                <div className="skeleton h-72 rounded-3xl"></div> :
+                <div key={item.id} 
+                    className='border-2 dark:bg-mediumDark dark:border-0 rounded-3xl overflow-hidden'
+                >
+                    <div className='w-full'>
+                        <img 
+                            src={optimizeImageUrl(item.background_image)} 
+                            className='object-cover w-full h-70 md:h-40'
+                        />
                     </div>
-                    <p className="text-2xl font-bold">{item.name} {getRating(item.ratings)}</p>
-                </div>
-        </div>
+                    <div className='p-5'>
+                        <div className='flex items-center justify-between mb-4'>
+                            <PlatformIconsList parent_platforms={item.parent_platforms} />
+                            <ScoreElement metacritic={item.metacritic} />
+                        </div>
+                        <p className="text-2xl font-bold mb-2">{item.name} {getRating(item.ratings)}</p>
+                        
+
+                    </div>
+                </div> 
+               
+            }
+
+             
+        </>
+
     )
 }
 

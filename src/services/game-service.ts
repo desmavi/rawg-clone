@@ -2,14 +2,12 @@ import createRequest from "./https-request";
 
 export interface Platform {
     id: number,
-    image_background: string,
-    name: string
+    name: string,
+    slug: string
 }
 
 export interface Platforms {
-    released_at: string,
     platform: Platform
-
 }
 
 export interface Ratings {
@@ -25,7 +23,9 @@ export interface Game {
     slug: string,
     background_image: string,
     ratings: Ratings[],
-    platforms: Platforms[]
+    parent_platforms: Platforms[],
+    metacritic: number
+
 }
 
 export interface GameList {

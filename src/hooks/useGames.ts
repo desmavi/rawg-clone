@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import gameService, {GameList, Game} from '../services/game-service'
 import ErrorProps from '../type/request'
+import { CanceledError } from 'axios'
 
 const useGames = () => {
 
@@ -18,13 +19,12 @@ const useGames = () => {
         request
             .then((res) => {
                 setGames(res.data.results)
-                setIsLoading(false)
-                setError({
-                    message:''
-                })
             })
             .catch(err => {
+                if(err instanceof CanceledError) return
                 setError(err)
+            })
+            .finally(() => {
                 setIsLoading(false)
             })
         
