@@ -17,7 +17,7 @@ function GameCard({ item, isLoading } : GameCardProps) {
                 isLoading ?
                 <div className="skeleton h-72 rounded-3xl"></div> :
                 <div key={item.id} 
-                    className='border-2 dark:bg-mediumDark dark:border-0 rounded-3xl overflow-hidden'
+                    className='border-2 bg-transparent dark:bg-mediumDark dark:border-0 rounded-3xl overflow-hidden transition-all'
                 >
                     <div className='w-full'>
                         <img 

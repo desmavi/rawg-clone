@@ -1,6 +1,6 @@
 import api from "./api-client";
 
-interface Entity {
+export interface Entity {
     id: number
 }
 

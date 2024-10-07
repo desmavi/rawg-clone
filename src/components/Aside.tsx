@@ -1,4 +1,4 @@
-import useGenres from '../hooks/useGenres'
+import useGenres from "../hooks/useGenres"
 
 interface AsideProps {
     onSelectGenre: (id: number | null) => void,
@@ -6,15 +6,26 @@ interface AsideProps {
 }
 
 function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
-    const { genres, error, isLoading } = useGenres()
-
+    const { data : genres, error, isLoading } = useGenres()
+    
     return (
         <div>
             <p className='text-lg font-bold mb-1'>Genres</p>
-            <small className="badge border-1 border-slate-500 dark:border-0 cursor-pointer mb-5"  onClick={() => onSelectGenre(null)}>Clear</small>
-            {error.message && <p>{error.message}</p>}
+            <small
+                className="badge border-1 border-slate-500 dark:border-0 cursor-pointer mb-5"  
+                onClick={() => onSelectGenre(null)}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter")
+                        onSelectGenre(null)
+                    }
+                }
+            >
+                    Clear
+            </small>
+            {error&& <p>{error}</p>}
             {
-                genres.map(el => {
+                genres.map((el) => {
                     return isLoading?
                     <div key={el.id} className="skeleton h-2 mb-3"></div>:
                     <p  key={el.id} 
@@ -24,6 +35,11 @@ function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
                         `}
                         onClick={() => onSelectGenre(el.id)}
                         tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter")
+                                onSelectGenre(el.id)
+                            }
+                        }
                     >
                         {el.name}
                     </p>
