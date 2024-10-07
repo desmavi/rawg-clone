@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
-import gameService, {GameList} from '../services/game-service'
+import gameService, {GameList, Game} from '../services/game-service'
 import ErrorProps from '../type/request'
 
 const useGames = () => {
 
-    const [games, setGames] = useState<GameList>({ 
-        count: 0,
-        results: []
-    })
+    const [games, setGames] = useState<Game[]>([])
 
     const [error, setError] = useState<ErrorProps>({
         message: ''
@@ -20,15 +17,15 @@ const useGames = () => {
         const { request, cancel } = gameService.getAll<GameList>()
         request
             .then((res) => {
-            setGames(res.data)
-            setIsLoading(false)
-            setError({
-                message:''
-            })
+                setGames(res.data.results)
+                setIsLoading(false)
+                setError({
+                    message:''
+                })
             })
             .catch(err => {
-            setError(err)
-            setIsLoading(false)
+                setError(err)
+                setIsLoading(false)
             })
         
         return () => cancel()

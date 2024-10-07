@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import Nav from './components/Nav'
 import useGames from './hooks/useGames'
+import { Game } from './services/game-service'
 
 function App() {
   
@@ -24,7 +24,7 @@ function App() {
             {error.message && <p>{error.message}</p>}
               <ul>
                 {
-                  games?.results?.map((el) => {
+                  games?.map((el:Game) => {
                     return <li key={el.id}>{el.name}</li>
                   })
                 } 
