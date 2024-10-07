@@ -1,12 +1,9 @@
 import './App.css'
 import Nav from './components/Nav'
-import useGames from './hooks/useGames'
-import { Game } from './services/game-service'
+import GamesGrid from './components/GamesGrid'
 
 function App() {
   
-  const { games, error, isLoading, setError, setGames} = useGames()
-
   return (
     <div className='bg-white text-dark dark:bg-dark dark:text-white'>
       <div className="container mx-auto ">
@@ -15,20 +12,13 @@ function App() {
           <Nav />
 
           {/* ASIDE */}
-          <div className="hidden md:block col-span-1 p-5">
+          <div className="hidden md:block col-span-1 px-5 py-8">
             ASIDE
           </div>
 
           {/* MAIN */}
-          <div className="col-span-6 md:col-span-5 p-5">
-            {error.message && <p>{error.message}</p>}
-              <ul>
-                {
-                  games?.map((el:Game) => {
-                    return <li key={el.id}>{el.name}</li>
-                  })
-                } 
-              </ul>
+          <div className="col-span-6 md:col-span-5 px-5 py-8">
+            <GamesGrid />
           </div>
         </div>
       </div>

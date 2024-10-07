@@ -30,4 +30,9 @@ app.get('/games', (req, res) => {
         .then(response => res.json(response.data))
 })
 
+app.get('/platforms', (req, res) => {
+    api.get("platforms")
+        .then(response => res.json(response.data))
+})
+
 app.listen( 8000, () => console.log("server is running"))

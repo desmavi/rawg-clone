@@ -9,7 +9,8 @@ export default {
     extend: {
       colors:{
         dark:"#151523",
-        lightDark:"hsla(0,0%,100%,.16)"
+        lightDark:"hsla(0,0%,100%,.16)",
+        mediumDark:"#202020"
       }
     },
   },
