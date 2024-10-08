@@ -31,7 +31,7 @@ function ToogleDarkMode() {
     return (
             <input 
                 type="checkbox"
-                className="toggle m-0 p-0'" 
+                className="toggle m-0 p-0" 
                 checked={theme === "dark" ?  true : false}
                 onChange={handleToggle}
             />
