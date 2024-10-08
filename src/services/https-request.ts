@@ -1,4 +1,5 @@
 import api from "./api-client";
+import { FilterProps } from "../hooks/useGames";
 
 export interface Entity {
     id: number
@@ -11,13 +12,11 @@ class HttpService {
         this.endpoint = endpoint
     }
 
-    getAll<T>(filter?: number){
+    getAll<T>(filters?: FilterProps){
         const controller = new AbortController();
         const request = api.get<T>(this.endpoint, {
             signal: controller.signal,
-            params: {
-                genres: filter
-            }
+            params: filters
         });
         return { request, cancel: () => controller.abort()};
     }

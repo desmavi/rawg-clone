@@ -16,6 +16,8 @@ export function getRating(ratings: Ratings[]){
         return "😑"
     } else if (topVoted.title == "skip"){
         return "⛔️"
+    } else {
+        return ""
     }
 }
 

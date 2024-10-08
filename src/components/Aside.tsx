@@ -32,6 +32,8 @@ function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
                         className={`${ (selectedGenre == el.id) && "underline" }
                             cursor-pointer 
                             mb-2
+                            hover:underline
+                            transition-all
                         `}
                         onClick={() => onSelectGenre(el.id)}
                         tabIndex={0}

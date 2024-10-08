@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Entity } from '../services/https-request'
 import { CanceledError, AxiosResponse  } from 'axios'
+import { FilterProps } from './useGames';
+import { objectHasNonNullValues } from '../utils/functions';
 
 interface GetResponse<T> {
     count: number;
@@ -8,7 +10,7 @@ interface GetResponse<T> {
 }
 
 interface HttpService {
-    getAll<T>(filter?:number): {
+    getAll<T>(filters?:FilterProps): {
         request: Promise<AxiosResponse<GetResponse<T>>>;
         cancel: () => void;
     };
@@ -17,14 +19,14 @@ interface HttpService {
     update<T extends Entity>(entity: T): Promise<AxiosResponse<T>>;
 }
 
-function useData<T>(service: HttpService, filter?: number | null) {
+function useData<T>(service: HttpService, filters? : FilterProps) {
     const [data, setData] = useState<T[]>([])
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)
-        const { request, cancel } = filter ? service.getAll<T>(filter) : service.getAll<T>()
+        const { request, cancel } = (filters && objectHasNonNullValues(filters)) ? service.getAll<T>(filters) : service.getAll<T>()
 
         request
             .then((res) => {
@@ -40,7 +42,7 @@ function useData<T>(service: HttpService, filter?: number | null) {
             })
 
         return () => cancel()
-    }, (filter || filter === null) ? [filter] : [])
+    }, [filters?.genres, filters?.parent_platforms] )
 
     return { data, error, isLoading }
 }

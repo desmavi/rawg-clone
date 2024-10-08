@@ -1,8 +1,13 @@
 import gameService, { Game } from '../services/game-service'
 import useData from './useData'
 
-const useGames = (filter?: number | null) => {
-    return useData<Game>(gameService, filter)
+export interface FilterProps {
+    genres: number | null,
+    parent_platforms: number | null
+}
+
+const useGames = (filters? : FilterProps) => {
+    return useData<Game>(gameService, filters)
 
 }
 

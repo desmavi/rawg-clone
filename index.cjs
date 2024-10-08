@@ -26,17 +26,24 @@ api.interceptors.request.use(config => {
 
 
 app.get('/games', (req, res) => {
+    console.log(req.query)
     api.get("games", {
         params: {
-            genres: req.query.genres
+            genres: req.query.genres,
+            parent_platforms: req.query.parent_platforms 
         }
     })
-        .then(response => res.json(response.data))
+    .then(response => res.json(response.data))
 })
 
 app.get('/genres', (req, res) => {
     api.get("genres")
-        .then(response => res.json(response.data))
+    .then(response => res.json(response.data))
+})
+
+app.get('/platforms', (req, res) => {
+    api.get("platforms/lists/parents")
+    .then(response => res.json(response.data))
 })
 
 app.listen( 8000, () => console.log("server is running"))
