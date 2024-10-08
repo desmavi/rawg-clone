@@ -16,3 +16,7 @@ A small React project that utilizes the RAWG API to build an interactive interfa
 - **TypeScript**: For type safety and better code maintainability.
 - **Axios**: For making HTTP requests to the RAWG API.
 - **Tailwind CSS**: For styling the application with utility-first CSS.
+
+## Project Link
+
+You can view the deployed version of the project here: [Demo](https://rawggame-aa6ytqo4n-emanuelas-projects-04ae6b4b.vercel.app/)
