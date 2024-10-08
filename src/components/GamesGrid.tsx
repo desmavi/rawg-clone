@@ -9,29 +9,22 @@ interface GamesGrid {
 
 function GamesGrid( { selectedGenre } : GamesGrid) {
 
-    const { data : games, error, isLoading} = useGames()
-
-    const filterGamesByGenre = selectedGenre 
-    ? games.filter(game => {
-        // Verifica se almeno un genere del gioco ha un id che corrisponde a selectedGenre
-        return game.genres.some(genre => genre.id === selectedGenre);
-    }) 
-    : games;
+    const { data : games, error, isLoading} = useGames(selectedGenre)
 
     return (
         <div>
             { error && <p>{error}</p> }
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
                     {
-                        filterGamesByGenre.length > 0 &&
-                            filterGamesByGenre.map(( el : Game) => {
+                        games.length > 0 &&
+                            games.map(( el : Game) => {
                                 return <GameCard key={el.id} item={el} isLoading={isLoading} />
                             })
                             
                     } 
 
                     {
-                        (filterGamesByGenre.length == 0 && selectedGenre) &&
+                        (games.length == 0 && selectedGenre) &&
                         <p>No match found</p>
                     }
                 </div>

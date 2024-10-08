@@ -11,10 +11,13 @@ class HttpService {
         this.endpoint = endpoint
     }
 
-    getAll<T>(){
+    getAll<T>(filter?: number){
         const controller = new AbortController();
         const request = api.get<T>(this.endpoint, {
-            signal: controller.signal
+            signal: controller.signal,
+            params: {
+                genres: filter
+            }
         });
         return { request, cancel: () => controller.abort()};
     }

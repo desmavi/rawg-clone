@@ -1,8 +1,8 @@
 import genreService, { Genre} from '../services/genre-service'
 import useData from './useData'
 
-const useGenres = () => {
-    return useData<Genre>(genreService)
+const useGenres = (filter?: number | null) => {
+    return useData<Genre>(genreService, filter)
 }
 
 export default useGenres

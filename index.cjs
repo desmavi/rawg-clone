@@ -26,7 +26,11 @@ api.interceptors.request.use(config => {
 
 
 app.get('/games', (req, res) => {
-    api.get("games")
+    api.get("games", {
+        params: {
+            genres: req.query.genres
+        }
+    })
         .then(response => res.json(response.data))
 })
 

@@ -8,7 +8,7 @@ interface GetResponse<T> {
 }
 
 interface HttpService {
-    getAll<T>(): {
+    getAll<T>(filter?:number): {
         request: Promise<AxiosResponse<GetResponse<T>>>;
         cancel: () => void;
     };
@@ -17,14 +17,14 @@ interface HttpService {
     update<T extends Entity>(entity: T): Promise<AxiosResponse<T>>;
 }
 
-function useData<T>(service: HttpService) {
+function useData<T>(service: HttpService, filter?: number | null) {
     const [data, setData] = useState<T[]>([])
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)
-        const { request, cancel } = service.getAll<T>()
+        const { request, cancel } = filter ? service.getAll<T>(filter) : service.getAll<T>()
 
         request
             .then((res) => {
@@ -40,7 +40,7 @@ function useData<T>(service: HttpService) {
             })
 
         return () => cancel()
-    }, [])
+    }, (filter || filter === null) ? [filter] : [])
 
     return { data, error, isLoading }
 }
