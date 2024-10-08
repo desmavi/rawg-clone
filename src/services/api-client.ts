@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'hhttps://apiexpress-eight.vercel.app'
+const BASE_URL = 'https://apiexpress-eight.vercel.app'
 
 const api = axios.create({
     baseURL: BASE_URL,
