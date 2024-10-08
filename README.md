@@ -19,4 +19,4 @@ A small React project that utilizes the RAWG API to build an interactive interfa
 
 ## Project Link
 
-You can view the deployed version of the project here: [Demo](https://rawggame-aa6ytqo4n-emanuelas-projects-04ae6b4b.vercel.app/)
+You can view the deployed version of the project here: [Demo](https://rawggame-nine.vercel.app)
