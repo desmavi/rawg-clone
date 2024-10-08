@@ -12,7 +12,7 @@ function Aside({ onSelectGenre, genre } : AsideProps) {
         <div>
             <p className='text-lg font-bold mb-1'>Genres</p>
             <small
-                className="badge border-1 border-slate-500 dark:border-0 cursor-pointer mb-5"  
+                className="badge border-1 border-slate-500 cursor-pointer mb-5"  
                 onClick={() => onSelectGenre(null, "genre")}
                 tabIndex={0}
                 onKeyDown={(e) => {

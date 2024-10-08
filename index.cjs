@@ -26,15 +26,19 @@ api.interceptors.request.use(config => {
 
 
 app.get('/games', (req, res) => {
-    console.log(req.query)
-    api.get("games", {
-        params: {
-            genres: req.query.genres,
-            parent_platforms: req.query.parent_platforms, 
-            ordering:req.query.ordering,
-            search: req.query.search
-        }
-    })
+
+    const params = {
+        genres: req.query.genres,
+        parent_platforms: req.query.parent_platforms,
+        ordering: req.query.ordering,
+    };
+
+    if (req.query.search && req.query.search.trim() !== "") {
+        params.search = req.query.search;
+    }
+
+
+    api.get("games", {params})
     .then(response => res.json(response.data))
 })
 

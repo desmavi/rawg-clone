@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Entity } from '../services/https-request'
 import { CanceledError, AxiosResponse  } from 'axios'
 import { FilterProps } from './useGames';
-import { objectHasNonNullValues } from '../utils/misc';
+import { objectHasNonNullValues, buildParamsObj } from '../utils/misc';
 
 interface GetResponse<T> {
     count: number;
@@ -23,10 +23,12 @@ function useData<T>(service: HttpService, filters? : FilterProps) {
     const [data, setData] = useState<T[]>([])
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const params = filters ? buildParamsObj<FilterProps>(filters)  : filters;
+
 
     useEffect(() => {
         setIsLoading(true)
-        const { request, cancel } = (filters && objectHasNonNullValues(filters)) ? service.getAll<T>(filters) : service.getAll<T>()
+        const { request, cancel } = (filters && objectHasNonNullValues(filters)) ? service.getAll<T>(params as FilterProps) : service.getAll<T>()
 
         request
             .then((res) => {

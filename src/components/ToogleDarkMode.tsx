@@ -29,14 +29,12 @@ function ToogleDarkMode() {
 
 
     return (
-        <div>
             <input 
                 type="checkbox"
-                className="toggle" 
+                className="toggle m-0 p-0'" 
                 checked={theme === "dark" ?  true : false}
                 onChange={handleToggle}
             />
-        </div>
     )
 }
 

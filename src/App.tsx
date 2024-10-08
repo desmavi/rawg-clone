@@ -8,7 +8,7 @@ export interface QueryObjectProps {
   genre: number | null,
   platform: number | null,
   ordering: string | null,
-  search: string | undefined
+  search: string
 }
 
 function App() {
@@ -35,11 +35,11 @@ function App() {
         <div className="grid grid-rows-[auto_1fr] grid-cols-6 min-h-screen">
           <Nav search={queryObject.search} onSearch={handleQueryObject}/>
 
-          <div className="hidden md:block col-span-1 px-5 py-8">
+          <div className="hidden md:block col-span-1 px-5 py-5 md:py-8">
             <Aside genre={queryObject.genre} onSelectGenre={handleQueryObject}/>
           </div>
 
-          <div className="col-span-6 md:col-span-5 px-5 py-8">
+          <div className="col-span-6 md:col-span-5 px-5 py-5 md:py-8">
             <GamesGrid queryObject={queryObject} onChangeQuery={handleQueryObject} />
           </div>
         </div>

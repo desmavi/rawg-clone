@@ -5,7 +5,7 @@ export interface FilterProps {
     genres: number | null,
     parent_platforms: number | null
     ordering: string | null
-    search?: string | undefined 
+    search?: string 
 }
 
 const useGames = (filters? : FilterProps) => {

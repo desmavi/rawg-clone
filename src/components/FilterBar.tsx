@@ -14,9 +14,9 @@ function FilterBar({ onChangeQuery } : QueryProps) {
     if((platforms.length === 0 || error)) return
 
     return (
-        <div className='mb-8'>
+        <div className='mb-8 flex-col md:flex-row'>
             <select 
-                className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0 me-4"
+                className="select select-ghost w-full md:w-1/4  border-[1px] border-slate-300 dark:border-0 me-4 mb-4"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     const value = e.target.value === "all" ? null : parseInt(e.target.value);
                     onChangeQuery(value, "platform");
@@ -33,7 +33,7 @@ function FilterBar({ onChangeQuery } : QueryProps) {
             </select>
 
             <select 
-                className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0 "
+                className="select select-ghost w-full md:w-1/4 border-[1px] border-slate-300 dark:border-0 "
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     const value =  e.target.value;
                     onChangeQuery(value, "ordering");
