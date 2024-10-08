@@ -2,10 +2,10 @@ import { ChangeEvent} from 'react'
 import usePlatforms from '../hooks/usePlatforms'
 
 interface FilterBar {
-    onSelectPlatform: (id: number | null) => void
+    onChangeQuery: (value:number | null, name:string) => void
 }
 
-function FilterBar({ onSelectPlatform } : FilterBar) {
+function FilterBar({ onChangeQuery } : FilterBar) {
 
     const {data: platforms, error } = usePlatforms() 
 
@@ -17,7 +17,7 @@ function FilterBar({ onSelectPlatform } : FilterBar) {
                 className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     const value = e.target.value === "all" ? null : parseInt(e.target.value);
-                    onSelectPlatform(value);
+                    onChangeQuery(value, "platform");
                 }}
             >
             

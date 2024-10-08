@@ -4,13 +4,27 @@ import Nav from './components/Nav'
 import GamesGrid from './components/GamesGrid'
 import Aside from './components/Aside'
 
+export interface QueryObjectProps {
+  genre: number | null
+  platform: number | null
+}
+
 function App() {
 
-  const [selectedGenre, setSelectedGenre] = useState<number | null >(null)
+  const [queryObject, setQueryObject] = useState<QueryObjectProps>({
+    genre: null,
+    platform: null
+  })
 
-  function handleSelectGenre(id: number | null){
-    setSelectedGenre(id)
+  function handleQueryObject(value:number | null, name:string){
+    setQueryObject(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
   }
+
   
   return (
     <div className='bg-white text-dark dark:bg-dark dark:text-white transition-all'>
@@ -21,12 +35,12 @@ function App() {
 
           {/* ASIDE */}
           <div className="hidden md:block col-span-1 px-5 py-8">
-            <Aside selectedGenre={selectedGenre} onSelectGenre={handleSelectGenre}/>
+            <Aside genre={queryObject.genre} onSelectGenre={handleQueryObject}/>
           </div>
 
           {/* MAIN */}
           <div className="col-span-6 md:col-span-5 px-5 py-8">
-            <GamesGrid selectedGenre={selectedGenre} />
+            <GamesGrid queryObject={queryObject} onChangeQuery={handleQueryObject} />
           </div>
         </div>
       </div>

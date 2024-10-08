@@ -1,11 +1,11 @@
 import useGenres from "../hooks/useGenres"
 
 interface AsideProps {
-    onSelectGenre: (id: number | null) => void,
-    selectedGenre: number | null
+    onSelectGenre: (value: number | null, name: string) => void,
+    genre: number | null
 }
 
-function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
+function Aside({ onSelectGenre, genre } : AsideProps) {
     const { data : genres, error, isLoading } = useGenres()
     
     return (
@@ -13,11 +13,11 @@ function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
             <p className='text-lg font-bold mb-1'>Genres</p>
             <small
                 className="badge border-1 border-slate-500 dark:border-0 cursor-pointer mb-5"  
-                onClick={() => onSelectGenre(null)}
+                onClick={() => onSelectGenre(null, "genre")}
                 tabIndex={0}
                 onKeyDown={(e) => {
                     if (e.key === "Enter")
-                        onSelectGenre(null)
+                        onSelectGenre(null, "genre")
                     }
                 }
             >
@@ -29,17 +29,17 @@ function Aside({ onSelectGenre, selectedGenre } : AsideProps) {
                     return isLoading?
                     <div key={el.id} className="skeleton h-2 mb-3"></div>:
                     <p  key={el.id} 
-                        className={`${ (selectedGenre == el.id) && "underline" }
+                        className={`${ (genre == el.id) && "underline" }
                             cursor-pointer 
                             mb-2
                             hover:underline
                             transition-all
                         `}
-                        onClick={() => onSelectGenre(el.id)}
+                        onClick={() => onSelectGenre(el.id, "genre")}
                         tabIndex={0}
                         onKeyDown={(e) => {
                             if (e.key === "Enter")
-                                onSelectGenre(el.id)
+                                onSelectGenre(el.id, "genre")
                             }
                         }
                     >

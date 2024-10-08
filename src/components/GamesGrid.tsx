@@ -1,27 +1,21 @@
-import { useState } from 'react'
 import useGames from '../hooks/useGames'
 import { Game} from '../services/game-service'
 import GameCard from './GameCard'
 import FilterBar from './FilterBar'
+import { QueryObjectProps } from '../App'
 
 interface GamesGrid {
-    selectedGenre: number | null
+    queryObject: QueryObjectProps,
+    onChangeQuery: (value:number | null, name:string) => void
 }
 
-function GamesGrid( { selectedGenre } : GamesGrid) {
+function GamesGrid( { queryObject, onChangeQuery } : GamesGrid) {
 
-    const [selectedPlatform, setSelectedPlatform ] = useState<number | null>(null)
-
-    function handleSelectPlatform(id: number | null){
-        setSelectedPlatform(id)
-      }
-
-    const { data : games, error, isLoading} = useGames({ genres: selectedGenre, 
-                                                        parent_platforms: selectedPlatform
-                                                    })
+    const { data : games, error, isLoading} = useGames({ genres: queryObject.genre, 
+                                                        parent_platforms: queryObject.platform})
     return (
         <div>
-            <FilterBar onSelectPlatform={handleSelectPlatform} />
+            <FilterBar onChangeQuery={onChangeQuery} />
             { error && <p>{error}</p> }
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
                 {
@@ -33,7 +27,7 @@ function GamesGrid( { selectedGenre } : GamesGrid) {
                 } 
 
                 {
-                    (games.length == 0 && selectedGenre) &&
+                    (games.length == 0 && (queryObject.genre || queryObject.platform)) &&
                     <p>No match found</p>
                 }
             </div>
