@@ -8,13 +8,13 @@ export function getRating(ratings: Ratings[]){
         }
     })
 
-    if(topVoted.title == "exceptional"){
+    if(topVoted?.title == "exceptional"){
         return "🎯"
-    } else if (topVoted.title == "recommended"){
+    } else if (topVoted?.title == "recommended"){
         return "👍🏻"
-    } else if (topVoted.title == "meh"){
+    } else if (topVoted?.title == "meh"){
         return "😑"
-    } else if (topVoted.title == "skip"){
+    } else if (topVoted?.title == "skip"){
         return "⛔️"
     } else {
         return ""
@@ -33,6 +33,9 @@ export function getScoreColor(score:number){
 
 export function optimizeImageUrl ( url: string){
     let dataForOptimization = "/crop/600/400"
+    if(!url || !url.indexOf("media/")) {
+        return "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
+    }
     let index = (url.indexOf("media/") + 'media/'.length) - 1
     let leftSideUrl = url.slice(0, index)
     let rightSideUrl = url.slice(index)

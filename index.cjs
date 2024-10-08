@@ -30,7 +30,9 @@ app.get('/games', (req, res) => {
     api.get("games", {
         params: {
             genres: req.query.genres,
-            parent_platforms: req.query.parent_platforms 
+            parent_platforms: req.query.parent_platforms, 
+            ordering:req.query.ordering,
+            search: req.query.search
         }
     })
     .then(response => res.json(response.data))

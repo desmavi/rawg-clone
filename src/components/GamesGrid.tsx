@@ -4,15 +4,18 @@ import GameCard from './GameCard'
 import FilterBar from './FilterBar'
 import { QueryObjectProps } from '../App'
 
-interface GamesGrid {
+export interface Query {
     queryObject: QueryObjectProps,
-    onChangeQuery: (value:number | null, name:string) => void
+    onChangeQuery: (value:number | null | string, name:string) => void
 }
 
-function GamesGrid( { queryObject, onChangeQuery } : GamesGrid) {
+function GamesGrid( { queryObject, onChangeQuery } : Query) {
 
     const { data : games, error, isLoading} = useGames({ genres: queryObject.genre, 
-                                                        parent_platforms: queryObject.platform})
+                                                        parent_platforms: queryObject.platform,
+                                                        ordering: queryObject.ordering,
+                                                        search: queryObject.search
+                                                    })
     return (
         <div>
             <FilterBar onChangeQuery={onChangeQuery} />

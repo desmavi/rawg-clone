@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Entity } from '../services/https-request'
 import { CanceledError, AxiosResponse  } from 'axios'
 import { FilterProps } from './useGames';
-import { objectHasNonNullValues } from '../utils/functions';
+import { objectHasNonNullValues } from '../utils/misc';
 
 interface GetResponse<T> {
     count: number;
@@ -42,7 +42,7 @@ function useData<T>(service: HttpService, filters? : FilterProps) {
             })
 
         return () => cancel()
-    }, [filters?.genres, filters?.parent_platforms] )
+    }, [filters?.genres, filters?.parent_platforms, filters?.ordering, filters?.search] )
 
     return { data, error, isLoading }
 }

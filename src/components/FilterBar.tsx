@@ -1,11 +1,13 @@
 import { ChangeEvent} from 'react'
 import usePlatforms from '../hooks/usePlatforms'
+import { capitalizeWords } from '../utils/misc'
+import { sortBy } from '../utils/const'
 
-interface FilterBar {
-    onChangeQuery: (value:number | null, name:string) => void
+export interface QueryProps {
+    onChangeQuery: (value:number | null | string, name:string) => void
 }
 
-function FilterBar({ onChangeQuery } : FilterBar) {
+function FilterBar({ onChangeQuery } : QueryProps) {
 
     const {data: platforms, error } = usePlatforms() 
 
@@ -14,7 +16,7 @@ function FilterBar({ onChangeQuery } : FilterBar) {
     return (
         <div className='mb-8'>
             <select 
-                className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0"
+                className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0 me-4"
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     const value = e.target.value === "all" ? null : parseInt(e.target.value);
                     onChangeQuery(value, "platform");
@@ -26,6 +28,22 @@ function FilterBar({ onChangeQuery } : FilterBar) {
                 {
                     platforms.map(el => {
                         return <option key={el.id} value={el.id}>{el.name}</option>
+                    })
+                }
+            </select>
+
+            <select 
+                className="select select-ghost w-full max-w-xs border-[1px] border-slate-300 dark:border-0 "
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    const value =  e.target.value;
+                    onChangeQuery(value, "ordering");
+                }}
+            >
+            
+                <option disabled>Order by</option>
+                {
+                    sortBy.map(el => {
+                        return <option key={el.label} value={el.value} className='capitalize'>{capitalizeWords(el.label)}</option>
                     })
                 }
             </select>

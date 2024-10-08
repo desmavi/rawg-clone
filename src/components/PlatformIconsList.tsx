@@ -24,7 +24,7 @@ interface PlatformIconsList {
 const PlatformIconsList= ({ parent_platforms } : PlatformIconsList) => {
     return (
         <div className='flex'>
-            {parent_platforms.map(el => {
+            {parent_platforms?.map(el => {
                 const IconComponent = platformsMap[el.platform.slug];
                 return IconComponent ? <IconComponent key={el.platform.id} className="me-2 opacity-50" /> : null;
             })}
