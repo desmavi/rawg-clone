@@ -3,6 +3,7 @@ import './App.css'
 import Nav from './components/Nav'
 import GamesGrid from './components/GamesGrid'
 import Aside from './components/Aside'
+import QrCodeBtn from './components/QrCodeBtn'
 
 export interface QueryObjectProps {
   genre: number | null,
@@ -44,6 +45,7 @@ function App() {
           </div>
         </div>
       </div>
+      <QrCodeBtn />
     </div>
   )
 }
