@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import { updateLocalStorage } from '../utils/localStorage'
+import { BiMoon } from 'react-icons/bi'
 
 function ToogleDarkMode() {
 
@@ -29,12 +30,22 @@ function ToogleDarkMode() {
 
 
     return (
-            <input 
-                type="checkbox"
-                className="toggle m-0 p-0" 
-                checked={theme === "dark" ?  true : false}
-                onChange={handleToggle}
-            />
+            <label className='flex items-center'>
+                <input 
+                    aria-label='Toggle dark mode'
+                    type="checkbox"
+                    className="toggle m-0 p-0 focus:border-2 border-slate-500 focus-within:border-2 focus-within:border-sky-800 me-3" 
+                    checked={theme === "dark" ?  true : false}
+                    onChange={handleToggle}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                        if(e.key == "Enter"){
+                            handleToggle()
+                        }
+                    }}
+                />
+                <BiMoon className='text-xl' />
+            </label>
     )
 }
 

@@ -12,7 +12,7 @@ function Nav({ search, onSearch }: NavProps) {
     <div className="col-span-6 px-6 py-8">
         <div className="flex justify-between items-center">
             <div>
-                <img src={logo} width="40"/>
+                <img src={logo} width="40" alt="logo" className="cursor-pointer"/>
             </div>
 
             <Search search={search} onSearch={onSearch} />

@@ -22,6 +22,7 @@ function GameCard({ item, isLoading } : GameCardProps) {
                         <img 
                             src={optimizeImageUrl(item.background_image)} 
                             className='object-cover w-full h-70 md:h-40'
+                            alt={item.name}
                         />
                     </div>
                     <div className='p-5'>
