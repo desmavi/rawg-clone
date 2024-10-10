@@ -6,3 +6,7 @@ export const sortBy = [
     {value: "-rating", label:"rating"},
     {value: "-metacritic", label:"Popolarity"}
 ]
+
+export const CACHE_KEY_GENRES = ["genres"]
+export const CACHE_KEY_PLATFORMS = ["platforms"]
+export const CACHE_KEY_GAMES = ["games"]

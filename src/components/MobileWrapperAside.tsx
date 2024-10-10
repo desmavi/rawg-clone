@@ -1,10 +1,6 @@
 import Aside from "./Aside"
 import { BiMenuAltRight } from "react-icons/bi";
-
-export interface WrapperAsideProps {
-  genre: number | null,
-  onSelectGenre: (value:number | null | string, name:string) => void
-}
+import { AsideProps as WrapperAsideProps } from "./Aside";
 
 
 function MobileWrapperAside({genre, onSelectGenre}:  WrapperAsideProps) {

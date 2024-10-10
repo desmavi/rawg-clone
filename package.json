@@ -11,6 +11,8 @@
     "start:backend": "nodemon index.cjs"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.59.8",
+    "@tanstack/react-query-devtools": "^5.59.8",
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

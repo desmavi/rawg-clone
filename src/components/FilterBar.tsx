@@ -2,6 +2,7 @@ import { ChangeEvent} from 'react'
 import usePlatforms from '../hooks/usePlatforms'
 import { capitalizeWords } from '../utils/misc'
 import { sortBy } from '../utils/const'
+import { Platform } from '../services/platform-service'
 
 export interface QueryProps {
     onChangeQuery: (value:number | null | string, name:string) => void
@@ -9,7 +10,7 @@ export interface QueryProps {
 
 function FilterBar({ onChangeQuery } : QueryProps) {
     const {data: platforms, error } = usePlatforms() 
-    if((platforms.length === 0 || error)) return
+    if((platforms?.results?.length === 0 || error?.message)) return
 
     return (
         <div className='mb-8 flex-col md:flex-row'>
@@ -32,7 +33,7 @@ function FilterBar({ onChangeQuery } : QueryProps) {
                 <option disabled>Filter by platform</option>
                 <option value="all">All</option>
                 {
-                    platforms.map(el => {
+                    platforms?.results.map((el : Platform) => {
                         return <option key={el.id} value={el.id}>{el.name}</option>
                     })
                 }

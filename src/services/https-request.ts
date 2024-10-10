@@ -1,9 +1,10 @@
 import api from "./api-client";
-import { FilterProps } from "../hooks/useGames";
+import { AxiosRequestConfig } from "axios";
 
 export interface Entity {
     id: number
 }
+
 
 class HttpService {
     endpoint: string;
@@ -12,13 +13,12 @@ class HttpService {
         this.endpoint = endpoint
     }
 
-    getAll<T>(filters?: FilterProps){
-        const controller = new AbortController();
+    getAll<T>(filters?: AxiosRequestConfig){
         const request = api.get<T>(this.endpoint, {
-            signal: controller.signal,
-            params: filters
-        });
-        return { request, cancel: () => controller.abort()};
+                params: filters?.params
+            })
+            .then(res => res.data)
+        return request
     }
 
     delete(id:number){
@@ -26,7 +26,7 @@ class HttpService {
     }
 
     create<T>(entity: T){
-        return api.post(this.endpoint, entity);
+        return api.post(this.endpoint, entity)
     }
 
     update<T extends Entity>(entity:T){

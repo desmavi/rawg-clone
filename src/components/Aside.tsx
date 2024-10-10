@@ -1,11 +1,12 @@
 import useGenres from "../hooks/useGenres"
 
-interface AsideProps {
+export interface AsideProps {
     onSelectGenre: (value: number | null, name: string) => void,
     genre: number | null
 }
 
 function Aside({ onSelectGenre, genre } : AsideProps) {
+
     const { data : genres, error, isLoading } = useGenres()
     
     return (
@@ -23,9 +24,9 @@ function Aside({ onSelectGenre, genre } : AsideProps) {
             >
                     Clear
             </small>
-            {error&& <p>{error}</p>}
+            {error&& <p>{error.message}</p>}
             {
-                genres.map((el) => {
+                genres?.results.map((el) => {
                     return isLoading?
                     <div key={el.id} className="skeleton h-2 mb-3"></div>:
                     <p  key={el.id} 

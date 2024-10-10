@@ -1,11 +1,7 @@
 import { Genre } from "./genre-service";
 import createRequest from "./https-request";
+import { Platform } from "./platform-service";
 
-export interface Platform {
-    id: number,
-    name: string,
-    slug: string
-}
 
 export interface Platforms {
     platform: Platform
@@ -32,7 +28,7 @@ export interface Game {
 
 export interface GameList {
     count: number,
-    results: Game[]
+    results: Game[] | []
 }
 
 export default createRequest("/games")

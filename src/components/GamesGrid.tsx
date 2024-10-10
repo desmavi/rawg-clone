@@ -12,14 +12,14 @@ export interface Query {
 
 function GamesGrid( { queryObject, onChangeQuery } : Query) {
 
-    const { data : games, error, isLoading} = useGames({ 
+    const { data : games , error, isFetching:isLoading } = useGames({ 
         genres: queryObject.genre, 
         parent_platforms: queryObject.platform,
         ordering: queryObject.ordering,
         search: queryObject.search
     })
 
-    if(error) return <p>{error}</p>
+    if(error) return <p>{error.message}</p>
 
     return (
         <div>
@@ -30,15 +30,14 @@ function GamesGrid( { queryObject, onChangeQuery } : Query) {
             <FilterBar onChangeQuery={onChangeQuery} />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
                 {
-                    games.length > 0 &&
-                        games.map(( el : Game) => {
+                        games?.results.map(( el : Game) => {
                             return <GameCard key={el.id} item={el} isLoading={isLoading} />
                         })
                         
                 } 
 
                 {
-                    (games.length == 0 && (queryObject.genre || queryObject.platform)) &&
+                    (games?.results?.length == 0 && (queryObject.genre || queryObject.platform || queryObject.search)) &&
                     <p>No match found</p>
                 }
             </div>

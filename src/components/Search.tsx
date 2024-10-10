@@ -1,9 +1,5 @@
 import { ChangeEvent } from "react"
-
-export interface SearchProps {
-    search: string,
-    onSearch: (value:number | null | string, name:string) => void
-}
+import { NavProps as SearchProps } from "./Nav"
 
 function Search({search, onSearch}:SearchProps) {
   return (

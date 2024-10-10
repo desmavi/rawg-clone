@@ -1,17 +1,16 @@
 import axios from "axios";
 
+export interface GetResponse<T> {
+    count: number;
+    results: T[];
+}
+
 const BASE_URL = 'https://apiexpress-eight.vercel.app'
+//const BASE_URL = "http://localhost:3000"
 
 const api = axios.create({
     baseURL: BASE_URL,
 });
 
-//PER PASSARE DEFAULT PARAMS ALLA RICHIESTA
-/* api.interceptors.request.use(config => {
-    config.params = {
-        ...config.params,
-    };
-    return config;
-}); */
 
 export default api

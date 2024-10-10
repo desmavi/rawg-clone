@@ -6,9 +6,4 @@ export interface Genre {
     slug: string
 }
 
-export interface GenresList {
-    count: number,
-    results: Genre[]
-}
-
 export default createRequest("/genres")
