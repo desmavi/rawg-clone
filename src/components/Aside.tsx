@@ -12,7 +12,12 @@ function Aside({ onSelectGenre, genre } : AsideProps) {
     return (
         <div>
             <p className='text-lg font-bold mb-1'>Genres</p>
-            <small
+            {
+                !genres && <div className="flex items-center justify-center my-10">
+                <span className="loading loading-spinner loading-lg"></span>
+            </div>
+            }
+            {genres && <small
                 className="badge border-1 border-slate-500 cursor-pointer mb-5"  
                 onClick={() => onSelectGenre(null, "genre")}
                 tabIndex={0}
@@ -23,7 +28,7 @@ function Aside({ onSelectGenre, genre } : AsideProps) {
                 }
             >
                     Clear
-            </small>
+            </small>}
             {error&& <p>{error.message}</p>}
             {
                 genres?.results.map((el) => {

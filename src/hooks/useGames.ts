@@ -1,7 +1,7 @@
 import gameService, { Game } from '../services/game-service'
 import { buildParamsObj } from '../utils/misc' 
 import { CACHE_KEY_GAMES } from '../utils/const'
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { GetResponse } from '../services/api-client'
 
 export interface FilterProps {
@@ -11,26 +11,37 @@ export interface FilterProps {
     search?: string 
 }
 
+export interface Props {
+    pageParams: number[]
+    pages: [GetResponse<Game>]
+}
+
 const useGames = (filters? : FilterProps) => {
 
     const dependenciesKey = [filters?.genres, filters?.parent_platforms, filters?.ordering, filters?.search].filter(dep => dep != null && dep !== "");
 
     const params = filters ? buildParamsObj<FilterProps>(filters)  : filters;
 
-    const { data, error, isLoading, isFetching} = useQuery<GetResponse<Game>, Error>({
+    function fetchGames(page: number){
+        return gameService.getAll<GetResponse<Game>>({
+            params: {
+                ...params,
+                page
+            },
+        })
+    }
+
+    const infiniteQuery = useInfiniteQuery<GetResponse<Game>, Error>({
         queryKey: [ ...CACHE_KEY_GAMES, ...dependenciesKey],
-        queryFn: () =>  gameService.getAll<GetResponse<Game>>({
-            params: params
-        }),
+        queryFn: ({ pageParam }) => fetchGames(pageParam as number),
+        initialPageParam:1,
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage.next ? allPages.length + 1 : undefined
+        },
         placeholderData: keepPreviousData
     })
 
-    return {
-            data, 
-            error, 
-            isLoading, 
-            isFetching 
-    } 
+    return infiniteQuery
 
 }
 

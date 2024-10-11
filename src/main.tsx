@@ -6,7 +6,14 @@ import './index.css'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false
+    }
+  }
+})
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
