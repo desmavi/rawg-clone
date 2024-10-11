@@ -3,13 +3,13 @@ import usePlatforms from '../hooks/usePlatforms'
 import { capitalizeWords } from '../utils/misc'
 import { sortBy } from '../utils/const'
 import { Platform } from '../services/platform-service'
+import { Query } from './GamesGrid'
 
-export interface QueryProps {
-    onChangeQuery: (value:number | null | string, name:string) => void
-}
 
-function FilterBar({ onChangeQuery } : QueryProps) {
-    const {data: platforms, error } = usePlatforms() 
+function FilterBar({ onChangeQuery } : Query) {
+
+    const {data: platforms, error } = usePlatforms()
+    
     if((platforms?.results?.length === 0 || error?.message)) return
 
     return (

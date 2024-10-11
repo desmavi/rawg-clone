@@ -36,7 +36,7 @@ function GamesGrid( { queryObject, onChangeQuery } : Query) {
                 <p className='text-3xl md:text-5xl'>Games</p>
                 <MobileWrapperAside genre={queryObject.genre} onSelectGenre={onChangeQuery}/>
             </div>
-            <FilterBar onChangeQuery={onChangeQuery} />
+            <FilterBar onChangeQuery={onChangeQuery} queryObject={queryObject} />
             {games && <InfiniteScroll
                 dataLength={dataSize}
                 next={fetchNextPage}
