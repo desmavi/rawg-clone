@@ -1,4 +1,4 @@
-import useGames, { Props } from '../hooks/useGames'
+import useGames from '../hooks/useGames'
 import { Game} from '../services/game-service'
 import GameCard from './GameCard'
 import FilterBar from './FilterBar'

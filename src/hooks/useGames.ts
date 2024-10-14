@@ -1,7 +1,7 @@
 import gameService, { Game } from '../services/game-service'
 import { buildParamsObj } from '../utils/misc' 
 import { CACHE_KEY_GAMES } from '../utils/const'
-import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 import { GetResponse } from '../services/api-client'
 
 export interface FilterProps {
