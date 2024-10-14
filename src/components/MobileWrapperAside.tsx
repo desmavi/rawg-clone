@@ -5,7 +5,7 @@ import { AsideProps as WrapperAsideProps } from "./Aside";
 
 function MobileWrapperAside({genre, onSelectGenre}:  WrapperAsideProps) {
   return (
-    <div className="drawer drawer-end block md:hidden w-auto">
+    <div className="drawer drawer-end block md:hidden w-auto relative z-10">
     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
     <div className="drawer-content">
         <label htmlFor="my-drawer-4" className="text-3xl cursor-pointer"><BiMenuAltRight />

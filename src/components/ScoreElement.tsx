@@ -9,7 +9,7 @@ function ScoreElement({ metacritic } : ScoreProps ) {
     if(!metacritic) return
     
     return (
-        <div className={`badge rounded-sm ${getScoreColor(metacritic)}`}>
+        <div className={`badge rounded-sm ${getScoreColor(metacritic)} text-dark`}>
             {metacritic}
         </div>
     )
