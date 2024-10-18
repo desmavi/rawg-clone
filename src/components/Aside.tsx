@@ -1,14 +1,12 @@
 import useGenres from "../hooks/useGenres"
+import useGameStore from "../store/gameStore"
 
-export interface AsideProps {
-    onSelectGenre: (value: number | null, name: string) => void,
-    genre: number | null
-}
 
-function Aside({ onSelectGenre, genre } : AsideProps) {
+function Aside() {
 
     const { data : genres, error, isLoading } = useGenres()
-    
+    const { queryObject, handleQueryObject } = useGameStore()
+
     return (
         <div>
             <p className='text-lg font-bold mb-1'>Genres</p>
@@ -19,33 +17,33 @@ function Aside({ onSelectGenre, genre } : AsideProps) {
             }
             {genres && <small
                 className="badge border-1 border-slate-500 cursor-pointer mb-5"  
-                onClick={() => onSelectGenre(null, "genre")}
+                onClick={() => handleQueryObject(null, "genre")}
                 tabIndex={0}
                 onKeyDown={(e) => {
                     if (e.key === "Enter")
-                        onSelectGenre(null, "genre")
+                        handleQueryObject(null, "genre")
                     }
                 }
             >
                     Clear
             </small>}
-            {error&& <p>{error.message}</p>}
+            {error && <p>{error.message}</p>}
             {
                 genres?.results.map((el) => {
                     return isLoading?
                     <div key={el.id} className="skeleton h-2 mb-3"></div>:
                     <p  key={el.id} 
-                        className={`${ (genre == el.id) && "underline" }
+                        className={`${ (queryObject.genre == el.id) && "underline" }
                             cursor-pointer 
                             mb-2
                             hover:underline
                             transition-all
                         `}
-                        onClick={() => onSelectGenre(el.id, "genre")}
+                        onClick={() => handleQueryObject(el.id, "genre")}
                         tabIndex={0}
                         onKeyDown={(e) => {
                             if (e.key === "Enter")
-                                onSelectGenre(el.id, "genre")
+                                handleQueryObject(el.id, "genre")
                             }
                         }
                     >

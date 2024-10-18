@@ -2,18 +2,14 @@ import useGames from '../hooks/useGames'
 import { Game} from '../services/game-service'
 import GameCard from './GameCard'
 import FilterBar from './FilterBar'
-import { QueryObjectProps } from '../App'
 import MobileWrapperAside from './MobileWrapperAside'
 import { Fragment } from 'react/jsx-runtime'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import useGameStore from '../store/gameStore'
 
-export interface Query {
-    queryObject: QueryObjectProps,
-    onChangeQuery: (value:number | null | string, name:string) => void
-}
+function GamesGrid( ) {
 
-function GamesGrid( { queryObject, onChangeQuery } : Query) {
-
+    const { queryObject, handleQueryObject} = useGameStore()
     const { data : games , error, isLoading, fetchNextPage, hasNextPage } = useGames({ 
         genres: queryObject.genre, 
         parent_platforms: queryObject.platform,
@@ -23,20 +19,17 @@ function GamesGrid( { queryObject, onChangeQuery } : Query) {
 
     if(error) return <p>{error.message}</p>
 
-
     const dataSize: number = games?.pages.flatMap(page => page.results).length || 0
 
-    console.log(hasNextPage, dataSize)
-
-
+    console.log(queryObject,'query')
 
     return (
         <div>
             <div className='flex justify-between items-center mb-8'>
                 <p className='text-3xl md:text-5xl'>Games</p>
-                <MobileWrapperAside genre={queryObject.genre} onSelectGenre={onChangeQuery}/>
+                <MobileWrapperAside genre={queryObject.genre} onSelectGenre={handleQueryObject}/>
             </div>
-            <FilterBar onChangeQuery={onChangeQuery} queryObject={queryObject} />
+            <FilterBar onChangeQuery={handleQueryObject} queryObject={queryObject} />
             {games && <InfiniteScroll
                 dataLength={dataSize}
                 next={fetchNextPage}
