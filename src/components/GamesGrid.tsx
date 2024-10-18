@@ -6,10 +6,11 @@ import MobileWrapperAside from './MobileWrapperAside'
 import { Fragment } from 'react/jsx-runtime'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import useGameStore from '../store/gameStore'
+import { Link } from 'react-router-dom'
 
 function GamesGrid( ) {
 
-    const { queryObject, handleQueryObject} = useGameStore()
+    const { queryObject } = useGameStore()
     const { data : games , error, isLoading, fetchNextPage, hasNextPage } = useGames({ 
         genres: queryObject.genre, 
         parent_platforms: queryObject.platform,
@@ -21,15 +22,14 @@ function GamesGrid( ) {
 
     const dataSize: number = games?.pages.flatMap(page => page.results).length || 0
 
-    console.log(queryObject,'query')
 
     return (
         <div>
-            <div className='flex justify-between items-center mb-8'>
+            <div className='flex justify-between items-center mb-8 px-2'>
                 <p className='text-3xl md:text-5xl'>Games</p>
-                <MobileWrapperAside genre={queryObject.genre} onSelectGenre={handleQueryObject}/>
+                <MobileWrapperAside/>
             </div>
-            <FilterBar onChangeQuery={handleQueryObject} queryObject={queryObject} />
+            <FilterBar />
             {games && <InfiniteScroll
                 dataLength={dataSize}
                 next={fetchNextPage}
@@ -49,11 +49,13 @@ function GamesGrid( ) {
                     
                 }
                 >
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-2'>
                     {games?.pages.map((page, index) => (
                         <Fragment key={index}>
                             {page?.results?.map(( el : Game) => {
-                                    return <GameCard key={el.id} item={el} isLoading={isLoading} />
+                                    return <Link key={el.id}  to={`games/${el.slug}`}>
+                                        <GameCard item={el} isLoading={isLoading} />
+                                    </Link>
                                 })}
                         </Fragment>
                     ))}

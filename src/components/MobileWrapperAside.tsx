@@ -1,9 +1,8 @@
 import Aside from "./Aside"
 import { BiMenuAltRight } from "react-icons/bi";
-import { AsideProps as WrapperAsideProps } from "./Aside";
 
 
-function MobileWrapperAside({genre, onSelectGenre}:  WrapperAsideProps) {
+function MobileWrapperAside() {
   return (
     <div className="drawer drawer-end block md:hidden w-auto relative z-10">
     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -14,7 +13,7 @@ function MobileWrapperAside({genre, onSelectGenre}:  WrapperAsideProps) {
     <div className="drawer-side">
         <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-8">
-        <Aside genre={genre} onSelectGenre={onSelectGenre}/>
+        <Aside/>
         </ul>
     </div>
 </div>

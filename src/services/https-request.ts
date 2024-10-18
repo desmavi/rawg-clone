@@ -21,6 +21,14 @@ class HttpService {
         return request
     }
 
+    getOne<T>(slug: string | undefined){
+        const request = api.get<T>(this.endpoint + '/' + slug )
+            .then(res => res.data)
+
+        return request
+
+    }
+
     delete(id:number){
         return api.delete(this.endpoint + '/' + id)
     }

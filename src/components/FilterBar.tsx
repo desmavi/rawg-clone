@@ -3,17 +3,18 @@ import usePlatforms from '../hooks/usePlatforms'
 import { capitalizeWords } from '../utils/misc'
 import { sortBy } from '../utils/const'
 import { Platform } from '../services/platform-service'
-import { Query } from './GamesGrid'
+import useGameStore from '../store/gameStore'
 
 
-function FilterBar({ onChangeQuery } : Query) {
+function FilterBar() { 
 
+    const onChangeQuery = useGameStore(s => s.handleQueryObject)
     const {data: platforms, error } = usePlatforms()
     
     if((platforms?.results?.length === 0 || error?.message)) return
 
     return (
-        <div className='mb-8 flex-col md:flex-row'>
+        <div className='mb-8 flex-col md:flex-row px-2'>
             <select 
                 aria-label="Filter by platform"
                 className="select select-ghost w-full md:w-1/4  border-[1px] border-slate-300 dark:border-slate-500 me-4 mb-4"
