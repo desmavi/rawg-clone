@@ -53,7 +53,13 @@ function GamesGrid( ) {
                     {games?.pages.map((page, index) => (
                         <Fragment key={index}>
                             {page?.results?.map(( el : Game) => {
-                                    return <Link key={el.id}  to={`games/${el.slug}`}>
+                                    return <Link key={el.id}  
+                                    to={`games/${el.slug}`}
+                                    className='block
+                                    border-2 bg-transparent dark:bg-mediumDark dark:border-0 rounded-3xl overflow-hidden 
+                                    scale-100 hover:scale-105 transition-all 
+                                    cursor-pointer
+                                    '>
                                         <GameCard item={el} isLoading={isLoading} />
                                     </Link>
                                 })}

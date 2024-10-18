@@ -1,12 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import gameService from '../services/game-service'
-
-interface GameObjectProps {
-    id: number,
-    name: string,
-    slug: string,
-    description_raw: string
-}
+import { GameObjectProps } from '../services/game-service'
 
 function useFindGameBySlug(slug: string | undefined) {
     const { data, isLoading, error } = useQuery({

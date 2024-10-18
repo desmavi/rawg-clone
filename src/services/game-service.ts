@@ -2,6 +2,22 @@ import { Genre } from "./genre-service";
 import createRequest from "./https-request";
 import { Platform } from "./platform-service";
 
+export interface  Publisher {
+    id: number,
+    name: string,
+    slug: string
+}
+
+export interface GameObjectProps {
+    id: number,
+    name: string,
+    slug: string,
+    description_raw: string,
+    metacritic: number,
+    parent_platforms: Platforms[],
+    genres: Genre[],
+    publishers: Publisher[]
+}
 
 export interface Platforms {
     platform: Platform

@@ -9,7 +9,7 @@ function Container({ children }: ContainerProps) {
     return (
         <div className='bg-white text-dark dark:bg-dark dark:text-white transition-all pb-5'>
                 <div className="container mx-auto ">
-                    <div className="grid grid-rows-[auto_1fr] min-h-screen">
+                    <div className="grid grid-rows-[auto_1fr] grid-cols-6 min-h-screen">
                         { children }
                     </div>
                 </div>
