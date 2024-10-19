@@ -38,7 +38,8 @@ const useGames = (filters? : FilterProps) => {
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.next ? allPages.length + 1 : undefined
         },
-        placeholderData: keepPreviousData
+        placeholderData: keepPreviousData,
+        staleTime: 24 * 60 * 60 * 1000 //24h
     })
 
     return infiniteQuery

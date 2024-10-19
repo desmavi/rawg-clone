@@ -1,14 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { getScreenshots, Screenshots } from '../services/screenshots-service'
+import {  Screenshots } from '../services/screenshots-service'
+import { HttpService } from '../services/https-request'
 
-function useGetScreenshots(id: number) {
+function useGetScreenshots(gameId: number) {
 
-    const {data, isLoading, error} = useQuery({
-        queryKey: ['screenshots', id ],
-        queryFn: () => getScreenshots<Screenshots>(id)
+    const screenshotsService = new HttpService(`/games/${gameId}/screenshots`)
+
+    const {data, isLoading, error, isFetching} = useQuery({
+        queryKey: ['screenshots', gameId ],
+        queryFn: () => screenshotsService.getAll<Screenshots>(),
+        staleTime: 24 * 60 * 60 * 1000 //24h
     })
 
-    return { data, isLoading, error }
+    return { data, isLoading, error, isFetching }
 
 
 }

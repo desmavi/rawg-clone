@@ -31,11 +31,16 @@ function GamePage() {
                     <BiArrowBack /> Back
                 </Link>
 
-                <h2 className='text-3xl font-bold mb-5'>{game?.name}</h2>
-                <img src={game?.background_image} className='h-[300px] w-full object-cover rounded-md mb-8 object-top'/>
-                <GameDescription text={game?.description_raw || ''} />
-                <GameAttributes game={game!} />
-                <GameScreenshots id={game?.id || 0}  />
+                <div className='grid lg:grid-cols-2 gap-8'>
+                    <div>
+                        <h2 className='text-3xl font-bold mb-5'>{game?.name}</h2>
+                        <GameDescription text={game?.description_raw || ''} />
+                        <GameAttributes game={game!} />
+                    </div>
+                    <div>
+                        <GameScreenshots id={game?.id || 0}  />
+                    </div>
+                </div>
             </div>
         </>
     )
