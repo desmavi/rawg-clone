@@ -22,13 +22,12 @@ export function buildParamsObj<T extends object>(params: T) : Record<string, any
 }
 
 //text trucation
-const CHAR_MAX_LENGTH = 400
 
-export function truncateText(text: string | undefined, isExpanded: boolean) {
+export function truncateText(text: string | undefined, isExpanded: boolean, limit: number) {
 
-    if (text && text.length > CHAR_MAX_LENGTH && !isExpanded) {
-        return text.substring(0, CHAR_MAX_LENGTH) +  "..."
-    } else if (text && text.length > CHAR_MAX_LENGTH && isExpanded) {
+    if (text && text.length > limit && !isExpanded) {
+        return text.substring(0, limit) +  "..."
+    } else if (text && text.length > limit && isExpanded) {
         return text
     } else {
         return text

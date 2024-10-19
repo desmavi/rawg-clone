@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { truncateText } from '../utils/misc'
+import { truncateText } from '../../utils/misc'
 
 const CHAR_MAX_LENGTH = 400
 
@@ -18,7 +18,7 @@ function GameDescription({ text } : DescriptionProps) {
 
     return (
         <div>
-            <p className='mb-3'>{truncateText(text, isExpanded)}</p>
+            <p className='mb-3'>{truncateText(text, isExpanded, CHAR_MAX_LENGTH)}</p>
             <button 
                 className='py-1 px-2 text-sm font-medium
                     bg-yellow-300 text-dark rounded-md

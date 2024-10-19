@@ -7,6 +7,7 @@ interface GameAttributeProps {
 
 
 function GameAttribute({attribute, children}: GameAttributeProps) {
+    
     return (
         <div className='my-5'>
         <div>

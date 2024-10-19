@@ -16,7 +16,8 @@ export interface GameObjectProps {
     metacritic: number,
     parent_platforms: Platforms[],
     genres: Genre[],
-    publishers: Publisher[]
+    publishers: Publisher[],
+    background_image: string
 }
 
 export interface Platforms {

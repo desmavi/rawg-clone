@@ -6,7 +6,7 @@ export interface Entity {
 }
 
 
-class HttpService {
+export class HttpService {
     endpoint: string;
 
     constructor(endpoint:string){
@@ -21,12 +21,11 @@ class HttpService {
         return request
     }
 
-    getOne<T>(slug: string | undefined){
+    getOne<T>(slug: string | number | undefined){
         const request = api.get<T>(this.endpoint + '/' + slug )
             .then(res => res.data)
 
         return request
-
     }
 
     delete(id:number){
